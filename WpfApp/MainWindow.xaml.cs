@@ -24,5 +24,39 @@ namespace WpfApp
         {
             InitializeComponent();
         }
+
+        private void BtnClick(object sender, RoutedEventArgs e)
+        {
+            ColorWindow wnd = new ColorWindow();
+            wnd.Show();
+        }
+
+        private void InputClick(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void ColorClick(object sender, RoutedEventArgs e)
+        {
+            ColorWindow colorWindow = new ColorWindow();
+            colorWindow.Show();
+        }
+
+        private void DrawClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AboutClick(object sender, RoutedEventArgs e)
+        {
+            AboutWindow aboutWindow = new AboutWindow();
+            aboutWindow.Show();
+        }
+
+        private void QuitClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
     }
 }

@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Pyankov Evgeny, P3417" Height="350" Width="525">
     <Grid>
-        
+        <Menu>
+            <MenuItem Header="Input" Click="InputClick"></MenuItem>
+            <MenuItem Header="Color" Click="ColorClick"></MenuItem>
+            <MenuItem Header="Draw" Click="DrawClick"></MenuItem>
+            <MenuItem Header="About" Click="AboutClick"></MenuItem>
+            <MenuItem Header="Quit" Click="QuitClick"></MenuItem>
+        </Menu>
+        <Button Name="button" Height="30" Width="50" Click="BtnClick">Click me!</Button>
     </Grid>
 </Window>
