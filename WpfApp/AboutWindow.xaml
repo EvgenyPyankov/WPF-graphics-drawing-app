@@ -3,9 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:core="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="About" Height="300" Width="300">
+        Title="About" Height="{DynamicResource HEIGHT}" Width="{DynamicResource WIDTH}">
+
+    <Window.Resources>
+        <core:Double x:Key="HEIGHT">200</core:Double>
+        <core:Double x:Key="WIDTH">200</core:Double>
+    </Window.Resources>
+    
     <Grid>
         
     </Grid>

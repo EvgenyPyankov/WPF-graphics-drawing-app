@@ -14,14 +14,30 @@ using System.Windows.Shapes;
 
 namespace WpfApp
 {
-    /// <summary>
-    /// Логика взаимодействия для ColorWindow.xaml
-    /// </summary>
     public partial class ColorWindow : Window
     {
         public ColorWindow()
         {
             InitializeComponent();
+        }
+
+        private void Scroll(object sender, RoutedEventArgs e)
+        {
+            //RScrollLabel.Content = "hello";
+            FrameworkElement element = e.Source as FrameworkElement;
+            switch (element.Name)
+            {
+                case "RScroll":
+                    RScrollLabel.Content = "255";
+                    break;
+                case "GScroll":
+                    GScrollLabel.Content = "255";
+                    break;
+                case "BScroll":
+                    BScrollLabel.Content = "255";
+                    break;
+            }
+           // RScrollLabel.Content = e.ToString();
         }
     }
 }

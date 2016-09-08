@@ -3,10 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:core="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="Color" Height="300" Width="300">
+        Title="Color" Height="{DynamicResource HEIGHT}" Width="{DynamicResource WIDTH}">
+
+    <Window.Resources>
+        <core:Double x:Key="HEIGHT">300</core:Double>
+        <core:Double x:Key="WIDTH">400</core:Double>
+        <core:Double x:Key="SCROLLBAR_WIDTH">100</core:Double>
+        <core:Double x:Key="SCROLLBAR_HEIGHT">20</core:Double>
+    </Window.Resources>
+    
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Name="RScrollLabel" Grid.Row="0" Grid.Column="0"></Label>
+        <Label Name="GScrollLabel" Grid.Row="1" Grid.Column="0"></Label>
+        <Label Name="BScrollLabel" Grid.Row="2" Grid.Column="0"></Label>
+        <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="0" Grid.Column="1" Name="RScroll"></ScrollBar>
+        <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="1" Grid.Column="1" Name="GScroll"></ScrollBar>
+        <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="2" Grid.Column="1" Name="BScroll"></ScrollBar>
     </Grid>
 </Window>

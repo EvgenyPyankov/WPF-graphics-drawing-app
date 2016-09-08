@@ -15,20 +15,18 @@ using System.Windows.Shapes;
 
 namespace WpfApp
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            Init();
         }
 
-        private void BtnClick(object sender, RoutedEventArgs e)
+        private void Init()
         {
-            ColorWindow wnd = new ColorWindow();
-            wnd.Show();
+           
+
         }
 
         private void InputClick(object sender, RoutedEventArgs e)

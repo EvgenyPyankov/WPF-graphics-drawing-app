@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace WpfApp
 {
-    /// <summary>
-    /// Логика взаимодействия для AboutWindow.xaml
-    /// </summary>
     public partial class AboutWindow : Window
     {
         public AboutWindow()

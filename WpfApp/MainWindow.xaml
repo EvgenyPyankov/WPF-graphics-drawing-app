@@ -3,9 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:core="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="Pyankov Evgeny, P3417" Height="350" Width="525">
+        Title="Pyankov Evgeny, P3417" Height="{DynamicResource HEIGHT}" Width="{DynamicResource WIDTH}">
+
+    <Window.Resources>
+        <core:Double x:Key="HEIGHT">300</core:Double>
+        <core:Double x:Key="WIDTH">400</core:Double>
+    </Window.Resources>
+    
     <Grid>
         <Menu>
             <MenuItem Header="Input" Click="InputClick"></MenuItem>
@@ -14,6 +21,5 @@
             <MenuItem Header="About" Click="AboutClick"></MenuItem>
             <MenuItem Header="Quit" Click="QuitClick"></MenuItem>
         </Menu>
-        <Button Name="button" Height="30" Width="50" Click="BtnClick">Click me!</Button>
     </Grid>
 </Window>
