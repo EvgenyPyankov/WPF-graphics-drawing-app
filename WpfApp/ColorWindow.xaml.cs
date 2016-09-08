@@ -16,28 +16,38 @@ namespace WpfApp
 {
     public partial class ColorWindow : Window
     {
+        private byte red = 34;
+        private byte green = 200;
+        private byte blue = 234;
+        private Color color;
+
         public ColorWindow()
         {
             InitializeComponent();
         }
 
+        public Color getColor()
+        {
+            return color;
+        }
+
         private void Scroll(object sender, RoutedEventArgs e)
         {
-            //RScrollLabel.Content = "hello";
+            //rScrollLabel.Content = "hello";
             FrameworkElement element = e.Source as FrameworkElement;
             switch (element.Name)
             {
-                case "RScroll":
-                    RScrollLabel.Content = "255";
+                case "rScroll":
+                    rScrollLabel.Content = "255";
                     break;
-                case "GScroll":
-                    GScrollLabel.Content = "255";
+                case "gScroll":
+                    gScrollLabel.Content = "255";
                     break;
-                case "BScroll":
-                    BScrollLabel.Content = "255";
+                case "bScroll":
+                    bScrollLabel.Content = "255";
                     break;
             }
-           // RScrollLabel.Content = e.ToString();
+           // rScrollLabel.Content = e.ToString();
         }
     }
 }

@@ -11,15 +11,26 @@
     <Window.Resources>
         <core:Double x:Key="HEIGHT">300</core:Double>
         <core:Double x:Key="WIDTH">400</core:Double>
+        <core:Double x:Key="CANVAS_HEIGHT">200</core:Double>
+        <core:Double x:Key="CANVAS_WIDTH">300</core:Double>
     </Window.Resources>
     
     <Grid>
-        <Menu>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Menu Grid.Row="0" Grid.Column="0">
             <MenuItem Header="Input" Click="InputClick"></MenuItem>
             <MenuItem Header="Color" Click="ColorClick"></MenuItem>
             <MenuItem Header="Draw" Click="DrawClick"></MenuItem>
             <MenuItem Header="About" Click="AboutClick"></MenuItem>
             <MenuItem Header="Quit" Click="QuitClick"></MenuItem>
         </Menu>
+        <Canvas Name="canvas" Width="{StaticResource CANVAS_WIDTH}" Height="{StaticResource CANVAS_HEIGHT}" Grid.Row="1" Grid.Column="0"></Canvas>
     </Grid>
 </Window>

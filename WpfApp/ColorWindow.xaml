@@ -25,11 +25,11 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Name="RScrollLabel" Grid.Row="0" Grid.Column="0"></Label>
-        <Label Name="GScrollLabel" Grid.Row="1" Grid.Column="0"></Label>
-        <Label Name="BScrollLabel" Grid.Row="2" Grid.Column="0"></Label>
-        <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="0" Grid.Column="1" Name="RScroll"></ScrollBar>
-        <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="1" Grid.Column="1" Name="GScroll"></ScrollBar>
-        <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="2" Grid.Column="1" Name="BScroll"></ScrollBar>
+        <Label Name="rScrollLabel" Grid.Row="0" Grid.Column="0"></Label>
+        <Label Name="gScrollLabel" Grid.Row="1" Grid.Column="0"></Label>
+        <Label Name="bScrollLabel" Grid.Row="2" Grid.Column="0"></Label>
+        <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="0" Grid.Column="1" Name="rScroll"></ScrollBar>
+        <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="1" Grid.Column="1" Name="gScroll"></ScrollBar>
+        <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="2" Grid.Column="1" Name="bScroll"></ScrollBar>
     </Grid>
 </Window>

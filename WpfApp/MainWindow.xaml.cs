@@ -42,13 +42,29 @@ namespace WpfApp
 
         private void DrawClick(object sender, RoutedEventArgs e)
         {
-
+        
+            Line myLine = new Line();
+            SolidColorBrush redBrush = new SolidColorBrush();
+            Color color = Color.FromRgb(100, 200, 34);
+            redBrush.Color = color;
+            myLine.Stroke = redBrush;
+            myLine.X1 = 1;
+            myLine.X2 = 50;
+            myLine.Y1 = 1;
+            myLine.Y2 = 50;
+            myLine.HorizontalAlignment = HorizontalAlignment.Left;
+            myLine.VerticalAlignment = VerticalAlignment.Center;
+            myLine.StrokeThickness = 2;
+            canvas.Children.Add(myLine);
         }
 
         private void AboutClick(object sender, RoutedEventArgs e)
         {
             AboutWindow aboutWindow = new AboutWindow();
-            aboutWindow.Show();
+            if (aboutWindow.ShowDialog() == true)
+            {
+                MessageBox.Show("yes ");
+            }
         }
 
         private void QuitClick(object sender, RoutedEventArgs e)
