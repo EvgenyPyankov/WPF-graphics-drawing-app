@@ -6,7 +6,7 @@
         xmlns:core="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="Pyankov Evgeny, P3417" Height="{DynamicResource HEIGHT}" Width="{DynamicResource WIDTH}">
+        Title="Pyankov Evgeny, P3417" Height="{DynamicResource HEIGHT}" Width="{DynamicResource WIDTH}" SizeChanged="Repaint">
 
     <Window.Resources>
         <core:Double x:Key="HEIGHT">300</core:Double>
@@ -17,7 +17,7 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -31,6 +31,6 @@
             <MenuItem Header="About" Click="AboutClick"></MenuItem>
             <MenuItem Header="Quit" Click="QuitClick"></MenuItem>
         </Menu>
-        <Canvas Name="canvas" Width="{StaticResource CANVAS_WIDTH}" Height="{StaticResource CANVAS_HEIGHT}" Grid.Row="1" Grid.Column="0"></Canvas>
+        <Canvas Name="canvas" Grid.Row="1" Grid.Column="0"></Canvas>
     </Grid>
 </Window>
