@@ -17,17 +17,13 @@ namespace WpfApp
 {
     public partial class MainWindow : Window
     {
+        private int[] x;
+        private int[] y;
+
         public MainWindow()
         {
             //TODO min windows size
             InitializeComponent();
-            Init();
-        }
-
-        private void Init()
-        {
-           
-
         }
 
         private void InputClick(object sender, RoutedEventArgs e)
@@ -46,9 +42,8 @@ namespace WpfApp
             DrawGraphic();   
         }
 
-        private void DrawGraphic()
+        private void DrawGraphic(PointCollection polylinePoints)
         {
-            canvas.Children.Clear();
             //double x = this.Width;
             //double y = this.Height;
             //Line myLine = new Line();
@@ -67,25 +62,47 @@ namespace WpfApp
 
             Polyline polyline = new Polyline();
             polyline.Stroke = redBrush;
-            System.Windows.Point Point1 = new System.Windows.Point(10, 100);
-            System.Windows.Point Point2 = new System.Windows.Point(100, 200);
-            System.Windows.Point Point3 = new System.Windows.Point(200, 30);
-            System.Windows.Point Point4 = new System.Windows.Point(250, 200);
-            System.Windows.Point Point5 = new System.Windows.Point(200, 150);
-            PointCollection polygonPoints = new PointCollection();
-            polygonPoints.Add(Point1);
-            polygonPoints.Add(Point2);
-            polygonPoints.Add(Point3);
-            polygonPoints.Add(Point4);
-            polygonPoints.Add(Point5);
-            polyline.Points = polygonPoints;
+            //System.Windows.Point Point1 = new System.Windows.Point(10, 100);
+            //System.Windows.Point Point2 = new System.Windows.Point(100, 200);
+            //System.Windows.Point Point3 = new System.Windows.Point(200, 30);
+            //System.Windows.Point Point4 = new System.Windows.Point(250, 200);
+            //System.Windows.Point Point5 = new System.Windows.Point(200, 150);
+            //PointCollection polygonPoints = new PointCollection();
+            //polygonPoints.Add(Point1);
+            //polygonPoints.Add(Point2);
+            //polygonPoints.Add(Point3);
+            //polygonPoints.Add(Point4);
+            //polygonPoints.Add(Point5);
+            polyline.Points = polylinePoints;
             polyline.StrokeThickness = 3;
             canvas.Children.Add(polyline);
         }
 
+        private void DrawAxis()
+        {
+
+        }
+
+        private void Paint()
+        {
+            double width = this.Width;
+            double height = this.Height;
+            double marginX = width / 10;
+            double marginY = height / 10;
+            canvas.Children.Clear();
+            DrawAxis();
+
+            PointCollection polylinePoints = new PointCollection();
+            for (int i=0; i<x.Length; i++)
+            {
+                polylinePoints.Add(new Point(1, 3));
+            }
+            DrawGraphic(polylinePoints);
+        }
+
         private void Repaint(object sender, RoutedEventArgs e)
         {
-            DrawGraphic();
+            Paint();
         }
 
         private void AboutClick(object sender, RoutedEventArgs e)
