@@ -112,10 +112,12 @@ namespace WpfApp
 
         private void CalculateValues()
         {
+            marginX = (double)this.Resources["MARGIN_X"];
+            marginY = (double)this.Resources["MARGIN_Y"];
             width = canvas.ActualWidth;
             height = canvas.ActualHeight;
-            marginX = width / 10;
-            marginY = height / 10;
+           // marginX = width / 10;
+            //marginY = height / 10;
             stepX = (width - marginX * 4) / (Math.Abs(0 - maxX)+Math.Abs(0-minX));
             stepY = (height - marginY * 4) /( Math.Abs(0 - minX)+Math.Abs(0-maxX));
             x0 = marginX * 2;

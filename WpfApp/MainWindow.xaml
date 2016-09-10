@@ -19,6 +19,8 @@
         <core:Double x:Key="WIDTH">600</core:Double>
         <core:Double x:Key="CANVAS_HEIGHT">200</core:Double>
         <core:Double x:Key="CANVAS_WIDTH">300</core:Double>
+        <core:Double x:Key="MARGIN_X">10</core:Double>
+        <core:Double x:Key="MARGIN_Y">10</core:Double>
     </Window.Resources>
     
     <Grid>

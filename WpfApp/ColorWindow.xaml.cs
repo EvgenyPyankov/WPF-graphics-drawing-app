@@ -34,12 +34,15 @@ namespace WpfApp
 
         private void Init()
         {
-            rScrollLabel.Content = red;
-            gScrollLabel.Content = green;
-            bScrollLabel.Content = blue;
-            rScroll.Value = 1d / red;
-            gScroll.Value = 1d / green;
-            bScroll.Value = 1d / blue;
+            //rScrollLabel.Content = red;
+            //gScrollLabel.Content = green;
+            //bScrollLabel.Content = blue;
+            //rScroll.Value = 1d / red;
+            //gScroll.Value = 1d / green;
+            //bScroll.Value = 1d / blue;
+            rScroll.Value = red;
+            gScroll.Value = green;
+            bScroll.Value = blue;
             drawColorWindow();
             
         }
@@ -57,18 +60,18 @@ namespace WpfApp
             switch (element.Name)
             {
                 case "rScroll":
-                    value = (byte)(255 * rScroll.Value);
-                    rScrollLabel.Content = value;
+                    value = (byte)rScroll.Value;
+                   // rScrollLabel.Content = value;
                     red = value;
                     break;
                 case "gScroll":
-                    value = (byte)(255*gScroll.Value);
-                    gScrollLabel.Content = value;
+                    value = (byte)gScroll.Value;
+                   // gScrollLabel.Content = value;
                     green = value;
                     break;
                 case "bScroll":
-                    value = (byte)(255 * bScroll.Value);
-                    bScrollLabel.Content = value;
+                    value = (byte)bScroll.Value;
+                    //bScrollLabel.Content = value;
                     blue = value;
                     break;
             }
