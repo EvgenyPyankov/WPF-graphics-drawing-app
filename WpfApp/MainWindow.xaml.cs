@@ -36,6 +36,7 @@ namespace WpfApp
         private double y0;
 
         private SolidColorBrush axisBrush = new SolidColorBrush(Color.FromRgb(128, 128, 128));
+        private SolidColorBrush graphicBrush = new SolidColorBrush(Color.FromRgb(200, 100, 100));
 
         public MainWindow()
         {
@@ -55,9 +56,9 @@ namespace WpfApp
             //double x = this.Width;
             //double y = this.Height;
             //Line myLine = new Line();
-            SolidColorBrush redBrush = new SolidColorBrush();
-            Color color = Color.FromRgb(100, 200, 34);
-            redBrush.Color = color;
+           // SolidColorBrush redBrush = new SolidColorBrush();
+           // Color color = Color.FromRgb(200, 100, 100);
+           // redBrush.Color = color;
             //myLine.Stroke = redBrush;
             //myLine.X1 = 1;
             //myLine.X2 = x / 2;
@@ -69,7 +70,7 @@ namespace WpfApp
             //canvas.Children.Add(myLine);
 
             Polyline polyline = new Polyline();
-            polyline.Stroke = redBrush;
+            polyline.Stroke = graphicBrush;
             //System.Windows.Point Point1 = new System.Windows.Point(10, 100);
             //System.Windows.Point Point2 = new System.Windows.Point(100, 200);
             //System.Windows.Point Point3 = new System.Windows.Point(200, 30);
@@ -178,7 +179,11 @@ namespace WpfApp
         private void ColorClick(object sender, RoutedEventArgs e)
         {
             ColorWindow colorWindow = new ColorWindow();
-            colorWindow.Show();
+            colorWindow.ShowDialog();
+            if (colorWindow.DialogResult == true)
+            {
+                graphicBrush.Color = colorWindow.coulor;
+            };
         }
 
         private void DrawClick(object sender, RoutedEventArgs e)

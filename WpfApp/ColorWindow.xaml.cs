@@ -19,6 +19,8 @@ namespace WpfApp
         private byte red = 100;
         private byte green = 200;
         private byte blue = 34;
+
+
         private Color color;
 
         public ColorWindow()
@@ -27,10 +29,18 @@ namespace WpfApp
             Init();
         }
 
-        public Color getColor()
+        public Color coulor
         {
-            return color;
+            get
+            {
+                return color;
+            }
         }
+
+       
+     
+
+
 
         private void Init()
         {
@@ -43,7 +53,7 @@ namespace WpfApp
             rScroll.Value = red;
             gScroll.Value = green;
             bScroll.Value = blue;
-            drawColorWindow();
+            color = Color.FromRgb(red, green, blue);
             
         }
 
@@ -75,6 +85,9 @@ namespace WpfApp
                     blue = value;
                     break;
             }
+            color.R = red;
+            color.G = green;
+            color.B = blue;
             drawColorWindow();
            // rScrollLabel.Content = e.ToString();
         }

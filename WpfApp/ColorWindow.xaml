@@ -40,7 +40,20 @@
         </DockPanel>
         <DockPanel VerticalAlignment="Center" Margin="10" Grid.Column="0" Grid.Row="1">
             <TextBox Text="{Binding ElementName=gScroll, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left" TextAlignment="Right" Width="40" />
-            <Slider Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" ValueChanged="Scroll" Name="gScroll" Maximum="255" IsSnapToTickEnabled="True"></Slider>
+            <Slider Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" ValueChanged="Scroll" Name="gScroll" Maximum="255" IsSnapToTickEnabled="True">
+                <Slider.Resources>
+                    <SolidColorBrush x:Key="SliderSelectionBackground" Color="Green" />
+                    <SolidColorBrush x:Key="SliderSelectionBorder" Color="Green" />
+                    <SolidColorBrush x:Key="SliderThumbBackground" Color="Black" />
+                    <SolidColorBrush x:Key="SliderThumbBackgroundDisabled" Color="Green" />
+                    <SolidColorBrush x:Key="SliderThumbBackgroundDragging" Color="Green" />
+                    <SolidColorBrush x:Key="SliderThumbBackgroundHover" Color="Green" />
+                    <SolidColorBrush x:Key="SliderThumbBorder" Color="Green" />
+                    <SolidColorBrush x:Key="SliderThumbBorderDisabled" Color="Green" />
+                    <SolidColorBrush x:Key="SliderThumbBorderDragging" Color="Green" />
+                    <SolidColorBrush x:Key="SliderThumbBorderHover" Color="Green" />
+                </Slider.Resources>
+            </Slider>
             <!--<Slider Maximum="255" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True" Name="slValue" />-->
         </DockPanel>
         <DockPanel VerticalAlignment="Center" Margin="10" Grid.Column="0" Grid.Row="2">
@@ -50,7 +63,7 @@
         </DockPanel>
         <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,20" Grid.Column="2">
             <Button IsDefault="True" Click="AcceptСlick" MinWidth="60" Margin="0,0,0,15">OK</Button>
-            <Button IsCancel="True" MinWidth="60">Отмена</Button>
+            <Button IsCancel="True" MinWidth="60">Cancel</Button>
         </WrapPanel>
     </Grid>
 </Window>
