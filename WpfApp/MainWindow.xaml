@@ -6,11 +6,17 @@
         xmlns:core="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="Pyankov Evgeny, P3417" Height="{DynamicResource HEIGHT}" Width="{DynamicResource WIDTH}" SizeChanged="Repaint">
+        Title="Pyankov Evgeny, P3417" 
+        Height="{DynamicResource HEIGHT}" 
+        Width="{DynamicResource WIDTH}" 
+        SizeChanged="Repaint"
+        MinWidth="350"
+        MinHeight="250">
+        
 
     <Window.Resources>
-        <core:Double x:Key="HEIGHT">300</core:Double>
-        <core:Double x:Key="WIDTH">400</core:Double>
+        <core:Double x:Key="HEIGHT">400</core:Double>
+        <core:Double x:Key="WIDTH">600</core:Double>
         <core:Double x:Key="CANVAS_HEIGHT">200</core:Double>
         <core:Double x:Key="CANVAS_WIDTH">300</core:Double>
     </Window.Resources>
@@ -24,10 +30,10 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
-        <Menu Grid.Row="0" Grid.Column="0">
+        <Menu Grid.Row="0" Grid.Column="0" Name="menu">
             <MenuItem Header="Input" Click="InputClick"></MenuItem>
             <MenuItem Header="Color" Click="ColorClick"></MenuItem>
-            <MenuItem Header="Draw" Click="DrawClick"></MenuItem>
+            <MenuItem Header="Draw" Name="drawMenuButton" Click="DrawClick"></MenuItem>
             <MenuItem Header="About" Click="AboutClick"></MenuItem>
             <MenuItem Header="Quit" Click="QuitClick"></MenuItem>
         </Menu>

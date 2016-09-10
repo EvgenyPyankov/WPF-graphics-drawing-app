@@ -6,15 +6,19 @@
         xmlns:core="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="About" Height="{DynamicResource HEIGHT}" Width="{DynamicResource WIDTH}">
+        Title="About"
+        Height="{DynamicResource HEIGHT}"
+        Width="{DynamicResource WIDTH}" 
+        ResizeMode="NoResize">
 
     <Window.Resources>
-        <core:Double x:Key="HEIGHT">200</core:Double>
-        <core:Double x:Key="WIDTH">200</core:Double>
+        <core:Double x:Key="HEIGHT">300</core:Double>
+        <core:Double x:Key="WIDTH">400</core:Double>
+        <core:String x:Key="TEXT">Developer: Evgeny Pyankov   Company: ITMO University</core:String>
     </Window.Resources>
-    
     <Grid>
-        <WrapPanel HorizontalAlignment="Right" Margin="0,15,0,0">
+        <Label Content="{StaticResource TEXT}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 20, 0, 0" ></Label>
+        <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,20" VerticalAlignment="Bottom">
             <Button IsDefault="True" Click="Accept_Click" MinWidth="60" Margin="0,0,10,0">OK</Button>
             <Button IsCancel="True" MinWidth="60">Отмена</Button>
         </WrapPanel>

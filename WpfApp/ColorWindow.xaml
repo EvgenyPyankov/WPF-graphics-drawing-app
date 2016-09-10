@@ -6,7 +6,10 @@
         xmlns:core="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="Color" Height="{DynamicResource HEIGHT}" Width="{DynamicResource WIDTH}">
+        Title="Color" 
+        Height="{DynamicResource HEIGHT}" 
+        Width="{DynamicResource WIDTH}"
+        ResizeMode="NoResize">
 
     <Window.Resources>
         <core:Double x:Key="HEIGHT">300</core:Double>
@@ -29,7 +32,7 @@
         <Label Name="gScrollLabel" Grid.Row="1" Grid.Column="0"></Label>
         <Label Name="bScrollLabel" Grid.Row="2" Grid.Column="0"></Label>
         <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="0" Grid.Column="1" Name="rScroll"></ScrollBar>
-        <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="1" Grid.Column="1" Name="gScroll"></ScrollBar>
+        <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="1" Grid.Column="1" Name="gScroll" Foreground="Green" ></ScrollBar>
         <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="2" Grid.Column="1" Name="bScroll"></ScrollBar>
     </Grid>
 </Window>

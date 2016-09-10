@@ -37,7 +37,6 @@ namespace WpfApp
 
         public MainWindow()
         {
-            //TODO min windows size
             //TODO refactor properties instead of methods
             //TODO delete unused imports
             InitializeComponent();
@@ -46,6 +45,7 @@ namespace WpfApp
 
         private void Init()
         {
+            drawMenuButton.IsEnabled = false;
         }
 
         private void DrawGraphic(PointCollection polylinePoints)
@@ -156,6 +156,7 @@ namespace WpfApp
 
         private void InputClick(object sender, RoutedEventArgs e)
         {
+            drawMenuButton.IsEnabled = true;
             Points points = new Points();
             x = points.getX();
             y = points.getY();
@@ -179,10 +180,7 @@ namespace WpfApp
         private void AboutClick(object sender, RoutedEventArgs e)
         {
             AboutWindow aboutWindow = new AboutWindow();
-            if (aboutWindow.ShowDialog() == true)
-            {
-                MessageBox.Show("yes ");
-            }
+            aboutWindow.ShowDialog();
         }
 
         private void QuitClick(object sender, RoutedEventArgs e)
