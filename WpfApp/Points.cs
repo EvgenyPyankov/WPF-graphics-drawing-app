@@ -1,0 +1,85 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WpfApp
+{
+    class Points
+    {
+        //private double[] x = { -10, -4, -2, 0, 1, 2, 8, 10 };
+        //private double[] y = { -10, -8, -6, 2, 2, 3, 4, 5 };
+
+        private double[] x = { -10, 0, 10 };
+        private double[] y = { -10, 0, 10 };
+
+        private double minY;
+        private double maxY;
+
+        public Points()
+        {
+            process();
+        }
+
+        public double[] getX()
+        {
+            return x;
+        }
+
+        public double[] getY()
+        {
+            return y;
+        }
+
+        public double getMinY()
+        {
+            return minY;
+        }
+
+        public double getMaxY()
+        {
+            return maxY;
+        }
+
+        private void process()
+        {
+            sort();
+            findMaxAndMinY();
+        }
+
+        private void findMaxAndMinY()
+        {
+            minY = y[0];
+            maxY = y[0];
+            for (int i=1; i<y.Length; i++)
+            {
+                if (y[i] > maxY)
+                    maxY = y[i];
+                if (y[i] < minY)
+                {
+                    minY = y[i];
+                }
+            }
+        }
+
+        private void sort()
+        {
+            for (int i=0; i<x.Length-1; i++)
+            {
+                for (int j=i+1; j<x.Length; j++)
+                {
+                    if (x[j] < x[i])
+                    {
+                        double bufX = x[j];
+                        double bufY = y[j];
+                        x[j] = x[i];
+                        y[j] = y[i];
+                        x[i] = bufX;
+                        y[i] = bufY;
+                    }
+                }
+            }
+        }
+    }
+}

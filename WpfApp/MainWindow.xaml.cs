@@ -17,29 +17,35 @@ namespace WpfApp
 {
     public partial class MainWindow : Window
     {
-        private int[] x;
-        private int[] y;
+        private double[] x;
+        private double[] y;
+
+        private double width;
+        private double height;
+        private double marginX;
+        private double marginY;
+        private double stepX;
+        private double stepY;
+        private double minX;
+        private double minY;
+        private double maxX;
+        private double maxY;
+        private double x0;
+        private double y0;
+
+        private SolidColorBrush axisBrush = new SolidColorBrush(Color.FromRgb(128, 128, 128));
 
         public MainWindow()
         {
             //TODO min windows size
+            //TODO refactor properties instead of methods
+            //TODO delete unused imports
             InitializeComponent();
+            Init();
         }
 
-        private void InputClick(object sender, RoutedEventArgs e)
+        private void Init()
         {
-           
-        }
-
-        private void ColorClick(object sender, RoutedEventArgs e)
-        {
-            ColorWindow colorWindow = new ColorWindow();
-            colorWindow.Show();
-        }
-
-        private void DrawClick(object sender, RoutedEventArgs e)
-        {
-            DrawGraphic();   
         }
 
         private void DrawGraphic(PointCollection polylinePoints)
@@ -78,31 +84,96 @@ namespace WpfApp
             canvas.Children.Add(polyline);
         }
 
+        private void DrawLines(List<double[]> lines, Brush brush)
+        {
+            foreach (double[] points in lines)
+            {
+                Line line = new Line();
+                line.Stroke = brush;
+                line.StrokeThickness = 0.5;
+                line.X1 = points[0];
+                line.Y1 = points[1];
+                line.X2 = points[2];
+                line.Y2 = points[3];
+                canvas.Children.Add(line);
+
+            }
+        }
+
         private void DrawAxis()
         {
+            List<double[]> lines = new List<double[]>();
+            lines.Add(new double[] { marginX, y0, width - marginX, y0 });
+            lines.Add(new double[] { x0, marginY, x0, height - marginY });
+            DrawLines(lines, axisBrush);
+        }
 
+        private void CalculateValues()
+        {
+            width = canvas.ActualWidth;
+            height = canvas.ActualHeight;
+            marginX = width / 10;
+            marginY = height / 10;
+            stepX = (width - marginX * 4) / Math.Abs(maxX - minX);
+            stepY = (height - marginY * 4) / Math.Abs(minY - maxY);
+            x0 = marginX * 2;
+            if (x[0] < 0)
+                x0 += Math.Abs(x[0]) * stepX;
+            y0 = marginY * 2;
+            if (maxY > 0)
+                y0 += maxY * stepY;
+            //MessageBox.Show(minX.ToString()+" "+minY.ToString()+" "+maxX.ToString() + " " + maxY.ToString());
         }
 
         private void Paint()
         {
-            double width = this.Width;
-            double height = this.Height;
-            double marginX = width / 10;
-            double marginY = height / 10;
             canvas.Children.Clear();
+            CalculateValues();
             DrawAxis();
+            DrawGraphic(calculatePoints());
+        }
 
+        private PointCollection calculatePoints()
+        {
             PointCollection polylinePoints = new PointCollection();
-            for (int i=0; i<x.Length; i++)
+            for (int i = 0; i < x.Length; i++)
             {
-                polylinePoints.Add(new Point(1, 3));
+                polylinePoints.Add(calculatePoint(x[i], y[i]));
             }
-            DrawGraphic(polylinePoints);
+            return polylinePoints;
+        }
+
+        private Point calculatePoint(double x, double y)
+        {
+            return new Point(x0 + x * stepX, y0 - y * stepY);
         }
 
         private void Repaint(object sender, RoutedEventArgs e)
         {
-            Paint();
+            if (x != null && y != null)
+                Paint();
+        }
+
+        private void InputClick(object sender, RoutedEventArgs e)
+        {
+            Points points = new Points();
+            x = points.getX();
+            y = points.getY();
+            minY = points.getMinY();
+            maxY = points.getMaxY();
+            minX = x[0];
+            maxX = x[x.Length-1];
+        }
+
+        private void ColorClick(object sender, RoutedEventArgs e)
+        {
+            ColorWindow colorWindow = new ColorWindow();
+            colorWindow.Show();
+        }
+
+        private void DrawClick(object sender, RoutedEventArgs e)
+        {
+            Paint();  
         }
 
         private void AboutClick(object sender, RoutedEventArgs e)

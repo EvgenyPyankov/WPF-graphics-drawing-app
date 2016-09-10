@@ -39,6 +39,7 @@ namespace WpfApp
             {
                 case "rScroll":
                     rScrollLabel.Content = "255";
+                    element.
                     break;
                 case "gScroll":
                     gScrollLabel.Content = "255";
