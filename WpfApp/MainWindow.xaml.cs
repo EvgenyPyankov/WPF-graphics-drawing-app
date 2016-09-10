@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
-using System.IO;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace WpfApp
 {
@@ -34,6 +26,9 @@ namespace WpfApp
         private double maxY;
         private double x0;
         private double y0;
+        private double arrayLength;
+        private double axisStepX;
+        private double axisStepY;
 
         private SolidColorBrush axisBrush = new SolidColorBrush(Color.FromRgb(128, 128, 128));
         private SolidColorBrush graphicBrush = new SolidColorBrush(Color.FromRgb(200, 100, 100));
@@ -41,7 +36,6 @@ namespace WpfApp
         public MainWindow()
         {
             //TODO refactor properties instead of methods
-            //TODO delete unused imports
             InitializeComponent();
             Init();
         }
@@ -49,39 +43,16 @@ namespace WpfApp
         private void Init()
         {
             drawMenuButton.IsEnabled = false;
+            marginX = (double)this.Resources["MARGIN_X"];
+            marginY = (double)this.Resources["MARGIN_Y"];
+            arrayLength = (double)this.Resources["ARROW_LENGTH"];
         }
 
         private void DrawGraphic(PointCollection polylinePoints)
         {
-            //double x = this.Width;
-            //double y = this.Height;
-            //Line myLine = new Line();
-           // SolidColorBrush redBrush = new SolidColorBrush();
-           // Color color = Color.FromRgb(200, 100, 100);
-           // redBrush.Color = color;
-            //myLine.Stroke = redBrush;
-            //myLine.X1 = 1;
-            //myLine.X2 = x / 2;
-            //myLine.Y1 = 1;
-            //myLine.Y2 = y / 2;
-            //myLine.HorizontalAlignment = HorizontalAlignment.Left;
-            //myLine.VerticalAlignment = VerticalAlignment.Center;
-            //myLine.StrokeThickness = 2;
-            //canvas.Children.Add(myLine);
-
+ 
             Polyline polyline = new Polyline();
             polyline.Stroke = graphicBrush;
-            //System.Windows.Point Point1 = new System.Windows.Point(10, 100);
-            //System.Windows.Point Point2 = new System.Windows.Point(100, 200);
-            //System.Windows.Point Point3 = new System.Windows.Point(200, 30);
-            //System.Windows.Point Point4 = new System.Windows.Point(250, 200);
-            //System.Windows.Point Point5 = new System.Windows.Point(200, 150);
-            //PointCollection polygonPoints = new PointCollection();
-            //polygonPoints.Add(Point1);
-            //polygonPoints.Add(Point2);
-            //polygonPoints.Add(Point3);
-            //polygonPoints.Add(Point4);
-            //polygonPoints.Add(Point5);
             polyline.Points = polylinePoints;
             polyline.StrokeThickness = 3;
             canvas.Children.Add(polyline);
@@ -103,31 +74,100 @@ namespace WpfApp
             }
         }
 
+        private void DrawNet()
+        {
+            List<double[]> lines = new List<double[]>();
+            findAxisSteps();
+            double cur;
+            int n = (int)(x0 / axisStepX);
+            cur = x0 - axisStepX * n;
+            while (cur < width - marginX)
+            {
+                lines.Add(new double[] { cur, marginY, cur, height - marginY });
+                cur += axisStepY;
+            }
+
+
+            n =(int)(y0 / axisStepY);
+            cur = y0 - axisStepY * n;
+            while (cur < height - marginY)
+            {
+                lines.Add(new double[] { marginX, cur, width - marginX, cur });
+                cur += axisStepY;
+            }
+
+            DrawLines(lines, graphicBrush);
+        }
+
         private void DrawAxis()
         {
             List<double[]> lines = new List<double[]>();
             lines.Add(new double[] { marginX, y0, width - marginX, y0 });
             lines.Add(new double[] { x0, marginY, x0, height - marginY });
+            lines.Add(new double[] { x0, marginY, x0-arrayLength, marginY+arrayLength});
+            lines.Add(new double[] { x0, marginY, x0+arrayLength, marginY+arrayLength});
+            lines.Add(new double[] { width-marginX, y0, width-marginX-arrayLength, y0-arrayLength });
+            lines.Add(new double[] { width - marginX, y0, width - marginX - arrayLength, y0 + arrayLength });
             DrawLines(lines, axisBrush);
+            Label label = new Label();
+            label.Content = "x";
+            label.HorizontalAlignment = HorizontalAlignment.Left;
+            label.VerticalAlignment = VerticalAlignment.Center;
+            canvas.Children.Add(label);
+        }
+
+        private int countZeros(double a)
+        {
+            string step = a.ToString();
+            step = step.Substring(2);
+            int i = 0;
+            while (i < step.Length && step[i] == '0')
+                i++;
+            return i;
+        }
+
+        private void findAxisSteps()
+        {
+            int n;
+            if (stepX > 1)
+                n = 0;
+            else n = countZeros(stepX);
+            axisStepX = Math.Round(stepX, n);
+
+            if (stepY > 1)
+                n = 0;
+            else n = countZeros(stepY);
+            axisStepY = Math.Round(stepY, n);
+                
+        }
+
+        private double findLength(double a, double b)
+        {
+            double c = a * b;
+            a = Math.Abs(a);
+            b = Math.Abs(b);
+            if (c < 0)
+            {
+                return a + b;
+            }
+            else
+            {
+                return Math.Max(a, b);
+            }
         }
 
         private void CalculateValues()
-        {
-            marginX = (double)this.Resources["MARGIN_X"];
-            marginY = (double)this.Resources["MARGIN_Y"];
+        {         
             width = canvas.ActualWidth;
             height = canvas.ActualHeight;
-           // marginX = width / 10;
-            //marginY = height / 10;
-            stepX = (width - marginX * 4) / (Math.Abs(0 - maxX)+Math.Abs(0-minX));
-            stepY = (height - marginY * 4) /( Math.Abs(0 - minX)+Math.Abs(0-maxX));
+            stepX = (width - marginX * 4) / findLength(minX, maxX);
+            stepY = (height - marginY * 4) /findLength(minY, maxY);
             x0 = marginX * 2;
             if (x[0] < 0)
                 x0 += Math.Abs(x[0]) * stepX;
             y0 = marginY * 2;
             if (maxY > 0)
                 y0 += maxY * stepY;
-            //MessageBox.Show(minX.ToString()+" "+minY.ToString()+" "+maxX.ToString() + " " + maxY.ToString());
         }
 
         private void Paint()
@@ -202,5 +242,13 @@ namespace WpfApp
             Application.Current.Shutdown();
         }
 
+
+        private void CanvasDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount == 2)
+            {  
+            DrawNet();
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@
         Width="{DynamicResource WIDTH}" 
         SizeChanged="Repaint"
         MinWidth="350"
-        MinHeight="250">
+        MinHeight="350">
         
 
     <Window.Resources>
@@ -19,8 +19,9 @@
         <core:Double x:Key="WIDTH">600</core:Double>
         <core:Double x:Key="CANVAS_HEIGHT">200</core:Double>
         <core:Double x:Key="CANVAS_WIDTH">300</core:Double>
-        <core:Double x:Key="MARGIN_X">10</core:Double>
-        <core:Double x:Key="MARGIN_Y">10</core:Double>
+        <core:Double x:Key="MARGIN_X">20</core:Double>
+        <core:Double x:Key="MARGIN_Y">20</core:Double>
+        <core:Double x:Key="ARROW_LENGTH">5</core:Double>
     </Window.Resources>
     
     <Grid>
@@ -39,6 +40,6 @@
             <MenuItem Header="About" Click="AboutClick"></MenuItem>
             <MenuItem Header="Quit" Click="QuitClick"></MenuItem>
         </Menu>
-        <Canvas Name="canvas" Grid.Row="1" Grid.Column="0"></Canvas>
+        <Canvas Name="canvas" Grid.Row="1" Grid.Column="0" MouseLeftButtonDown="CanvasDoubleClick" Background="White"></Canvas>
     </Grid>
 </Window>
