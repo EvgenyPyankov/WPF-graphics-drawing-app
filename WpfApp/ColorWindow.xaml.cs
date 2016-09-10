@@ -40,6 +40,13 @@ namespace WpfApp
             rScroll.Value = 1d / red;
             gScroll.Value = 1d / green;
             bScroll.Value = 1d / blue;
+            drawColorWindow();
+            
+        }
+
+        private void drawColorWindow()
+        {
+            canvas.Background = new SolidColorBrush(Color.FromRgb(red, green, blue));
         }
 
         private void Scroll(object sender, RoutedEventArgs e)
@@ -65,7 +72,13 @@ namespace WpfApp
                     blue = value;
                     break;
             }
+            drawColorWindow();
            // rScrollLabel.Content = e.ToString();
+        }
+
+        private void AcceptСlick(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
         }
     }
 }

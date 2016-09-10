@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,16 @@ namespace WpfApp
         private double minY;
         private double maxY;
 
+        private String path;
+
         public Points()
         {
+            process();
+        }
+
+        public Points(String path)
+        {
+            this.path = path;
             process();
         }
 
@@ -44,8 +53,30 @@ namespace WpfApp
 
         private void process()
         {
+            readFile();
             sort();
             findMaxAndMinY();
+        }
+
+        private void readFile()
+        {
+            StreamReader streamReader = new StreamReader(path);
+            string str = "";
+
+            str = streamReader.ReadLine();
+            String[]strArrX = str.Split(' ');
+            str = streamReader.ReadLine();
+            String[] strArrY = str.Split(' ');
+            if (strArrX.Length != strArrY.Length)
+                throw new Exception("Wrong input file format!");
+            x = new double[strArrX.Length];
+            y = new double[strArrY.Length];
+            for (int i=0; i<x.Length; i++)
+            {
+                x[i] = Convert.ToDouble(strArrX[i]);
+                y[i] = Convert.ToDouble(strArrY[i]);
+            }
+
         }
 
         private void findMaxAndMinY()

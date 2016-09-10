@@ -6,7 +6,7 @@
         xmlns:core="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="Pyankov Evgeny, P3417" 
+        Title="Pyankov Evgeny, P3417, #18" 
         Height="{DynamicResource HEIGHT}" 
         Width="{DynamicResource WIDTH}" 
         SizeChanged="Repaint"

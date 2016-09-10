@@ -27,12 +27,20 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Name="rScrollLabel" Grid.Row="0" Grid.Column="0"></Label>
         <Label Name="gScrollLabel" Grid.Row="1" Grid.Column="0"></Label>
         <Label Name="bScrollLabel" Grid.Row="2" Grid.Column="0"></Label>
-        <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="0" Grid.Column="1" Name="rScroll"></ScrollBar>
+        <Slider Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" ValueChanged="Scroll" Grid.Row="0" Grid.Column="1" Name="rScroll"></Slider>
         <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="1" Grid.Column="1" Name="gScroll" Foreground="Green" ></ScrollBar>
         <ScrollBar Width="{StaticResource SCROLLBAR_WIDTH}" Height="{StaticResource SCROLLBAR_HEIGHT}" Orientation="Horizontal" Scroll="Scroll" Grid.Row="2" Grid.Column="1" Name="bScroll"></ScrollBar>
+        <Canvas Name="canvas" Grid.Column="2"></Canvas>
+        <Slider Foreground="Green"></Slider>
+        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,20" Grid.Column="3">
+            <Button IsDefault="True" Click="AcceptСlick" MinWidth="60" Margin="0,0,0,15">OK</Button>
+            <Button IsCancel="True" MinWidth="60">Отмена</Button>
+        </WrapPanel>
     </Grid>
 </Window>

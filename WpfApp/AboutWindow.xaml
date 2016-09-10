@@ -14,12 +14,12 @@
     <Window.Resources>
         <core:Double x:Key="HEIGHT">300</core:Double>
         <core:Double x:Key="WIDTH">400</core:Double>
-        <core:String x:Key="TEXT">Developer: Evgeny Pyankov   Company: ITMO University</core:String>
+        <core:String x:Key="TEXT" xml:space="preserve">Developer: Evgeny Pyankov&#13;Group: P3417&#13;Company: ITMO University&#13;Variant: 18&#13;2016</core:String>
     </Window.Resources>
     <Grid>
-        <Label Content="{StaticResource TEXT}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 20, 0, 0" ></Label>
+        <Label Content="{StaticResource TEXT}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 50, 0, 0" ></Label>
         <WrapPanel HorizontalAlignment="Center" Margin="0,0,0,20" VerticalAlignment="Bottom">
-            <Button IsDefault="True" Click="Accept_Click" MinWidth="60" Margin="0,0,10,0">OK</Button>
+            <Button IsDefault="True" Click="AcceptClick" MinWidth="60" Margin="0,0,10,0">OK</Button>
             <Button IsCancel="True" MinWidth="60">Отмена</Button>
         </WrapPanel>
     </Grid>

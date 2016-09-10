@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+using System.IO;
 
 namespace WpfApp
 {
@@ -114,8 +116,8 @@ namespace WpfApp
             height = canvas.ActualHeight;
             marginX = width / 10;
             marginY = height / 10;
-            stepX = (width - marginX * 4) / Math.Abs(maxX - minX);
-            stepY = (height - marginY * 4) / Math.Abs(minY - maxY);
+            stepX = (width - marginX * 4) / (Math.Abs(0 - maxX)+Math.Abs(0-minX));
+            stepY = (height - marginY * 4) /( Math.Abs(0 - minX)+Math.Abs(0-maxX));
             x0 = marginX * 2;
             if (x[0] < 0)
                 x0 += Math.Abs(x[0]) * stepX;
@@ -156,14 +158,19 @@ namespace WpfApp
 
         private void InputClick(object sender, RoutedEventArgs e)
         {
-            drawMenuButton.IsEnabled = true;
-            Points points = new Points();
-            x = points.getX();
-            y = points.getY();
-            minY = points.getMinY();
-            maxY = points.getMaxY();
-            minX = x[0];
-            maxX = x[x.Length-1];
+            var fileDialog = new OpenFileDialog();
+            var result = fileDialog.ShowDialog();
+            if (result == true)
+            {
+                drawMenuButton.IsEnabled = true;
+                Points points = new Points(fileDialog.FileName);
+                x = points.getX();
+                y = points.getY();
+                minY = points.getMinY();
+                maxY = points.getMaxY();
+                minX = x[0];
+                maxX = x[x.Length - 1];
+            }
         }
 
         private void ColorClick(object sender, RoutedEventArgs e)
