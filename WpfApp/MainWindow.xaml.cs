@@ -78,24 +78,39 @@ namespace WpfApp
         private void DrawNet()
         {
             List<double[]> lines = new List<double[]>();
-            findAxisSteps();
-            double cur;
-            int n = (int)(x0-marginX*2 / axisStepX);
-            cur = x0 - axisStepX * n;
-            while (cur < width - marginX)
+            double axisStepX = (width - 2 * marginX) / 10;
+            double axisStepY =(height - 2 * marginY) / 8;
+            double cur = marginX;
+            while (cur <= width - marginX/2)
             {
                 lines.Add(new double[] { cur, marginY, cur, height - marginY });
                 cur += axisStepX;
             }
 
-
-            n =(int)(y0-marginY*2 / axisStepY);
-            cur = y0 - axisStepY * n;
-            while (cur < height - marginY)
+            cur = marginY;
+            while (cur <= height-marginY/2)
             {
-                lines.Add(new double[] { marginX, cur, width - marginX, cur });
+                lines.Add(new double[] { marginX, cur, width-marginX, cur });
                 cur += axisStepY;
             }
+            //findAxisSteps();
+            //double cur;
+            //int n = (int)(x0-marginX*2 / axisStepX);
+            //cur = x0 - axisStepX * n;
+            //while (cur < width - marginX)
+            //{
+            //    lines.Add(new double[] { cur, marginY, cur, height - marginY });
+            //    cur += axisStepX;
+            //}
+
+
+            //n =(int)(y0-marginY*2 / axisStepY);
+            //cur = y0 - axisStepY * n;
+            //while (cur < height - marginY)
+            //{
+            //    lines.Add(new double[] { marginX, cur, width - marginX, cur });
+            //    cur += axisStepY;
+            //}
 
             DrawLines(lines, graphicBrush);
         }
