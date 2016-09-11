@@ -29,6 +29,7 @@ namespace WpfApp
         private double arrayLength;
         private double axisStepX;
         private double axisStepY;
+        private bool toDrawNet = false;
 
         private SolidColorBrush axisBrush = new SolidColorBrush(Color.FromRgb(128, 128, 128));
         private SolidColorBrush graphicBrush = new SolidColorBrush(Color.FromRgb(200, 100, 100));
@@ -79,16 +80,16 @@ namespace WpfApp
             List<double[]> lines = new List<double[]>();
             findAxisSteps();
             double cur;
-            int n = (int)(x0 / axisStepX);
+            int n = (int)(x0-marginX*2 / axisStepX);
             cur = x0 - axisStepX * n;
             while (cur < width - marginX)
             {
                 lines.Add(new double[] { cur, marginY, cur, height - marginY });
-                cur += axisStepY;
+                cur += axisStepX;
             }
 
 
-            n =(int)(y0 / axisStepY);
+            n =(int)(y0-marginY*2 / axisStepY);
             cur = y0 - axisStepY * n;
             while (cur < height - marginY)
             {
@@ -128,16 +129,22 @@ namespace WpfApp
 
         private void findAxisSteps()
         {
+            double w = Math.Abs(width-2*marginX);
+            double h = Math.Abs(height-2*marginY);
+            w /= 10;
+            h /= 8;
+            //w *= stepX;
+            //h *= stepY;
             int n;
-            if (stepX > 1)
+            if (w > 1)
                 n = 0;
-            else n = countZeros(stepX);
-            axisStepX = Math.Round(stepX, n);
+            else n = countZeros(w);
+            axisStepX = Math.Round(w, n);
 
-            if (stepY > 1)
+            if (h > 1)
                 n = 0;
-            else n = countZeros(stepY);
-            axisStepY = Math.Round(stepY, n);
+            else n = countZeros(h);
+            axisStepY = Math.Round(h, n);
                 
         }
 
@@ -172,10 +179,15 @@ namespace WpfApp
 
         private void Paint()
         {
-            canvas.Children.Clear();
-            CalculateValues();
-            DrawAxis();
-            DrawGraphic(calculatePoints());
+            if (x != null && y != null)
+            {
+                canvas.Children.Clear();
+                CalculateValues();
+                DrawAxis();
+                if (toDrawNet)
+                    DrawNet();
+                DrawGraphic(calculatePoints());
+            }
         }
 
         private PointCollection calculatePoints()
@@ -195,7 +207,6 @@ namespace WpfApp
 
         private void Repaint(object sender, RoutedEventArgs e)
         {
-            if (x != null && y != null)
                 Paint();
         }
 
@@ -245,9 +256,10 @@ namespace WpfApp
 
         private void CanvasDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount == 2)
-            {  
-            DrawNet();
+            if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount == 2 && x!=null && y!=null)
+            {
+                toDrawNet = !toDrawNet;
+                Paint();
             }
         }
     }
