@@ -31,6 +31,7 @@ namespace WpfApp
         private double axisStepY;
         private bool toDrawNet = false;
         private double defaultWidth;
+  
 
         private SolidColorBrush axisBrush = new SolidColorBrush(Color.FromRgb(128, 128, 128));
         private SolidColorBrush graphicBrush = new SolidColorBrush(Color.FromRgb(100, 200, 34));
@@ -62,14 +63,12 @@ namespace WpfApp
             canvas.Children.Add(polyline);
         }
 
-        private void DrawLines(List<double[]> lines, Brush brush)
+        private void DrawLines(List<double[]> lines, Style style)
         {
             foreach (double[] points in lines)
             {
                 Line line = new Line();
-                line.StrokeDashArray = new DoubleCollection() { 3 };
-                line.Stroke = brush;
-                line.StrokeThickness = 0.5;
+                line.Style = style;
                 line.X1 = points[0];
                 line.Y1 = points[1];
                 line.X2 = points[2];
@@ -128,7 +127,7 @@ namespace WpfApp
             //    lines.Add(new double[] { marginX, cur, width - marginX, cur });
             //    cur += axisStepY;
             //}
-            DrawLines(lines, graphicBrush);
+            DrawLines(lines, (Style)this.Resources["NET_STYLE"]);
         }
 
         private void DrawAxis()
@@ -140,7 +139,7 @@ namespace WpfApp
             lines.Add(new double[] { x0, marginY, x0+arrayLength, marginY+arrayLength});
             lines.Add(new double[] { width-marginX, y0, width-marginX-arrayLength, y0-arrayLength });
             lines.Add(new double[] { width - marginX, y0, width - marginX - arrayLength, y0 + arrayLength });
-            DrawLines(lines, axisBrush);
+            DrawLines(lines, (Style)this.Resources["AXIS_STYLE"]);
             Label label = new Label();
             label.Content = "x";
             label.HorizontalAlignment = HorizontalAlignment.Left;

@@ -22,7 +22,19 @@
         <core:Double x:Key="MARGIN_X">20</core:Double>
         <core:Double x:Key="MARGIN_Y">20</core:Double>
         <core:Double x:Key="ARROW_LENGTH">5</core:Double>
+
+        <Style x:Key="AXIS_STYLE" TargetType="{x:Type Line}">
+            <Setter Property="Stroke" Value="Gray" />
+            <Setter Property="StrokeThickness" Value="1"/>
+        </Style>
+
+        <Style x:Key="NET_STYLE" TargetType="{x:Type Line}">
+            <Setter Property="Stroke" Value="Gray" />
+            <Setter Property="StrokeDashArray" Value="3" />
+            <Setter Property="StrokeThickness" Value="0.5"/>
+        </Style>
     </Window.Resources>
+    
     
     <Grid>
         <Grid.RowDefinitions>
