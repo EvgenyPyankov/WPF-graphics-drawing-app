@@ -30,9 +30,11 @@ namespace WpfApp
         private double axisStepX;
         private double axisStepY;
         private bool toDrawNet = false;
+        private double defaultWidth;
 
         private SolidColorBrush axisBrush = new SolidColorBrush(Color.FromRgb(128, 128, 128));
-        private SolidColorBrush graphicBrush = new SolidColorBrush(Color.FromRgb(200, 100, 100));
+        private SolidColorBrush graphicBrush = new SolidColorBrush(Color.FromRgb(100, 200, 34));
+
 
         public MainWindow()
         {
@@ -47,6 +49,7 @@ namespace WpfApp
             marginX = (double)this.Resources["MARGIN_X"];
             marginY = (double)this.Resources["MARGIN_Y"];
             arrayLength = (double)this.Resources["ARROW_LENGTH"];
+            defaultWidth = canvas.ActualWidth;
         }
 
         private void DrawGraphic(PointCollection polylinePoints)
@@ -64,6 +67,7 @@ namespace WpfApp
             foreach (double[] points in lines)
             {
                 Line line = new Line();
+                line.StrokeDashArray = new DoubleCollection() { 3 };
                 line.Stroke = brush;
                 line.StrokeThickness = 0.5;
                 line.X1 = points[0];
@@ -75,13 +79,26 @@ namespace WpfApp
             }
         }
 
+        private void calculateNet()
+        {
+            //double step = de
+        }
+
         private void DrawNet()
         {
+            Label label1 = new Label();
+            label1.Content = "1.25";
+           // label1.SetValue(Canvas.SetBottom, 10);
+            Canvas.SetTop(label1, 100);
+            Canvas.SetLeft(label1, 100);
+            Canvas can = new Canvas();
+            can.Children.Add(label1);
+            canvas.Children.Add(can);
             List<double[]> lines = new List<double[]>();
-            double axisStepX = (width - 2 * marginX) / 10;
-            double axisStepY =(height - 2 * marginY) / 8;
+            double axisStepX = (width - 2 * marginX) / 9;
+            double axisStepY =(height - 2 * marginY) / 7;
             double cur = marginX;
-            while (cur <= width - marginX/2)
+            while (cur <= width - marginX / 2) 
             {
                 lines.Add(new double[] { cur, marginY, cur, height - marginY });
                 cur += axisStepX;
@@ -111,7 +128,6 @@ namespace WpfApp
             //    lines.Add(new double[] { marginX, cur, width - marginX, cur });
             //    cur += axisStepY;
             //}
-
             DrawLines(lines, graphicBrush);
         }
 
