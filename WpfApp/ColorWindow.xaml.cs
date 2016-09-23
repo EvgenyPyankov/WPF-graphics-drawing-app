@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -44,16 +45,15 @@ namespace WpfApp
 
         private void Init()
         {
-            //rScrollLabel.Content = red;
-            //gScrollLabel.Content = green;
-            //bScrollLabel.Content = blue;
-            //rScroll.Value = 1d / red;
-            //gScroll.Value = 1d / green;
-            //bScroll.Value = 1d / blue;
             rScroll.Value = red;
             gScroll.Value = green;
             bScroll.Value = blue;
             color = Color.FromRgb(red, green, blue);
+            //MessageBox.Show(rScroll.Template.Resources["BorderBrush"].ToString());
+            
+            //Track track = (Track)rScroll.Template.FindName("track", rScroll);
+            //track.Thumb.Background =  new SolidColorBrush(Color.FromRgb(red, green, blue));
+          
             
         }
 

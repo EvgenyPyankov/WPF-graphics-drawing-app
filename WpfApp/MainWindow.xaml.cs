@@ -55,7 +55,6 @@ namespace WpfApp
 
         private void DrawGraphic(PointCollection polylinePoints)
         {
- 
             Polyline polyline = new Polyline();
             polyline.Stroke = graphicBrush;
             polyline.Points = polylinePoints;
