@@ -42,7 +42,6 @@
 
         <Style x:Key="NET_STYLE" TargetType="{x:Type Line}">
             <Setter Property="Stroke" Value="Gray" />
-            <!--<Setter Property="StrokeDashArray" Value="3" />-->
             <Setter Property="StrokeThickness" Value="0.3"/>
         </Style>
     </Window.Resources>

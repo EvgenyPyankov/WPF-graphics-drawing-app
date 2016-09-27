@@ -78,7 +78,6 @@ namespace WpfApp
             {
                 MessageBox.Show("Wrong input file format!", "Oops");
             }
-
         }
 
         private void findMaxAndMinY()

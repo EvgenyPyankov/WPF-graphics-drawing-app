@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WpfApp
 {
@@ -38,11 +27,7 @@ namespace WpfApp
             }
         }
 
-       
-     
-
-
-
+      
         private void Init()
         {
             red = (byte)Application.Current.Resources["R"];
@@ -137,16 +122,6 @@ namespace WpfApp
             color.G = green;
             color.B = blue;
             drawColorWindow();
-            //Accumulate some value
-            //someValue += e.Delta;
-
-            //timer.Stop();
-            //timer.Start();
-            //red++;
-            //color.R = red;
-            //rScroll.Value++;
-            //drawColorWindow();
-            //MessageBox.Show(e.Delta.ToString());
         }
     }
 }
