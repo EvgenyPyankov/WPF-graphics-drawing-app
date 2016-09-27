@@ -26,12 +26,13 @@
         <Style x:Key="LABEL_STYLE" TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="Black"></Setter>
             <Setter Property="FontSize" Value="8"></Setter>
-            <Setter Property="FontFamily" Value="Tahoma"></Setter>
-            <!--<Setter Property="Width" Value="2"></Setter>
-               <Setter Property="Height" Value="2"></Setter>-->
-            <!--<Setter Property="Stroke" Value="Gray"/>
-            <Setter Property="Stroke" Value="White"/>
-            <Setter Property="BorderThickness" Value="2"/>-->
+            <Setter Property="FontFamily" Value="Cambria"></Setter>
+        </Style>
+
+        <Style x:Key="XY_STYLE" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="FontFamily" Value="Cambria"></Setter>
         </Style>
 
         <Style x:Key="AXIS_STYLE" TargetType="{x:Type Line}">

@@ -52,8 +52,7 @@ namespace WpfApp
             gScroll.Value = green;
             bScroll.Value = blue;
             color = Color.FromRgb(red, green, blue);
- 
-                 
+            MouseWheel += MainWindow_MouseWheel;
         }
 
         private void drawColorWindow()
@@ -92,6 +91,62 @@ namespace WpfApp
             Application.Current.Resources["G"] = green;
             Application.Current.Resources["B"] = blue;
             this.DialogResult = true;
+        }
+
+        void MainWindow_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            int delta;
+            if (e.Delta > 0)
+                delta = 1;
+            else
+                delta = -1;
+
+            FrameworkElement element = FocusManager.GetFocusedElement(this) as FrameworkElement;
+            int buf = 0;
+            switch (element.Name)
+            {
+                case "rScroll":
+                    if ((red > 0 && delta < 0) || (red < 255 && delta > 0))
+                    {
+                        buf = red;
+                        buf += delta;
+                        red = (byte)buf;
+                        rScroll.Value = red;
+                    }
+                    break;
+                case "gScroll":
+                    if ((green > 0 && delta < 0) || (green < 255 && delta > 0))
+                    {
+                        buf = green;
+                        buf += delta;
+                        green = (byte)buf;
+                        gScroll.Value = green;
+                    }
+                    break;
+                case "bScroll":
+                    if ((blue > 0 && delta < 0) || (blue < 255 && delta > 0))
+                    {
+                        buf = blue;
+                        buf += delta;
+                        blue = (byte)buf;
+                        bScroll.Value = blue;
+                    }
+                    break;
+            }
+            color.R = red;
+            color.G = green;
+            color.B = blue;
+            drawColorWindow();
+            //Accumulate some value
+            //someValue += e.Delta;
+
+            //timer.Stop();
+            //timer.Start();
+            //red++;
+            //color.R = red;
+            //rScroll.Value++;
+            //drawColorWindow();
+            //MessageBox.Show(e.Delta.ToString());
         }
     }
 }

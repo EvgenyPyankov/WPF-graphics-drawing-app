@@ -1,16 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace WpfApp
 {
     class Points
     {
-        //private double[] x = { -10, -4, -2, 0, 1, 2, 8, 10 };
-        //private double[] y = { -10, -8, -6, 2, 2, 3, 4, 5 };
 
         private double[] x = { -10, 0, 10 };
         private double[] y = { -10, 0, 10 };
@@ -58,23 +53,30 @@ namespace WpfApp
             findMaxAndMinY();
         }
 
-        private void readFile()
+        private void readFile ()
         {
-            StreamReader streamReader = new StreamReader(path);
-            string str = "";
-
-            str = streamReader.ReadLine();
-            String[]strArrX = str.Split(' ');
-            str = streamReader.ReadLine();
-            String[] strArrY = str.Split(' ');
-            if (strArrX.Length != strArrY.Length)
-                throw new Exception("Wrong input file format!");
-            x = new double[strArrX.Length];
-            y = new double[strArrY.Length];
-            for (int i=0; i<x.Length; i++)
+            try
             {
-                x[i] = Convert.ToDouble(strArrX[i]);
-                y[i] = Convert.ToDouble(strArrY[i]);
+                StreamReader streamReader = new StreamReader(path);
+                string str = "";
+
+                str = streamReader.ReadLine();
+                String[] strArrX = str.Split(' ');
+                str = streamReader.ReadLine();
+                String[] strArrY = str.Split(' ');
+                if (strArrX.Length != strArrY.Length)
+                    throw new Exception("Wrong input file format!");
+                x = new double[strArrX.Length];
+                y = new double[strArrY.Length];
+                for (int i = 0; i < x.Length; i++)
+                {
+                    x[i] = Convert.ToDouble(strArrX[i]);
+                    y[i] = Convert.ToDouble(strArrY[i]);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Wrong input file format!", "Oops");
             }
 
         }
