@@ -203,32 +203,32 @@ namespace WpfApp
 
         private void DrawNet()
         {
-            
-            //List<double[]> lines = new List<double[]>();
-            //double axisStepX = (width - 2 * marginX) / 9;
-            //double axisStepY =(height - 2 * marginY) / 7;
-            //double cur = marginX;
-            //while (cur <= width - marginX / 2) 
-            //{
-            //    lines.Add(new double[] { cur, marginY, cur, height - marginY });
-            //    cur += axisStepX;
-            //}
 
-            //cur = marginY;
-            //while (cur <= height-marginY/2)
-            //{
-            //    lines.Add(new double[] { marginX, cur, width-marginX, cur });
-            //    cur += axisStepY;
-            //}
+            List<double[]> lines = new List<double[]>();
+            double axisStepX = (width - 2 * marginX) / 9;
+            double axisStepY = (height - 2 * marginY) / 7;
+            double cur = marginX;
+            while (cur <= width - marginX / 2)
+            {
+                lines.Add(new double[] { cur, marginY, cur, height - marginY });
+                cur += axisStepX;
+            }
+
+            cur = marginY;
+            while (cur <= height - marginY / 2)
+            {
+                lines.Add(new double[] { marginX, cur, width - marginX, cur });
+                cur += axisStepY;
+            }
             //findAxisSteps();
-            //double cur;
-            //int n = (int)(x0-marginX*2 / axisStepX);
+            //int n = (int)(x0 - marginX * 2 / axisStepX);
             //cur = x0 - axisStepX * n;
             //while (cur < width - marginX)
             //{
             //    lines.Add(new double[] { cur, marginY, cur, height - marginY });
             //    cur += axisStepX;
             //}
+            DrawLines(lines, (Style)this.Resources["NET_STYLE"]);
 
 
             //n =(int)(y0-marginY*2 / axisStepY);
@@ -238,8 +238,8 @@ namespace WpfApp
             //    lines.Add(new double[] { marginX, cur, width - marginX, cur });
             //    cur += axisStepY;
             //}
-            DrawLines(xNetLines, (Style)this.Resources["NET_STYLE"]);
-            DrawLines(yNetLines, (Style)this.Resources["NET_STYLE"]);
+            //DrawLines(xNetLines, (Style)this.Resources["NET_STYLE"]);
+            //DrawLines(yNetLines, (Style)this.Resources["NET_STYLE"]);
         }
 
         private void DrawAxis()
