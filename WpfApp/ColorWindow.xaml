@@ -21,6 +21,12 @@
         <SolidColorBrush x:Key="bBrush" Color="#3F51B5"></SolidColorBrush>
 
         <Style x:Key="CUSTOM_SLIDER_R" TargetType="Slider">
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="BorderBrush" Value="Orange"></Setter>
+                </Trigger>
+            </Style.Triggers>
             <Setter Property="BorderBrush" Value="LightGray" />
             <Setter Property="BorderThickness" Value="0.5,0.5,0.5,0.5" />
             <Setter Property="Template">
@@ -46,6 +52,12 @@
         </Style>
 
         <Style x:Key="CUSTOM_SLIDER_G" TargetType="Slider">
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="BorderBrush" Value="Orange"></Setter>
+                </Trigger>
+            </Style.Triggers>
             <Setter Property="BorderBrush" Value="LightGray" />
             <Setter Property="BorderThickness" Value="0.5,0.5,0.5,0.5" />
             <Setter Property="Template">
@@ -72,6 +84,13 @@
 
 
         <Style x:Key="CUSTOM_SLIDER_B" TargetType="Slider">
+            <Style.Triggers>
+                
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="BorderBrush" Value="Orange"></Setter>
+                </Trigger>
+            </Style.Triggers>
             <Setter Property="BorderBrush" Value="LightGray" />
             <Setter Property="BorderThickness" Value="0.5,0.5,0.5,0.5" />
             <Setter Property="Template">
@@ -96,8 +115,8 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
-    <Grid>
+
+    <Grid FocusManager.FocusedElement="{Binding ElementName=rScroll}">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>

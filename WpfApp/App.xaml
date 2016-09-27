@@ -5,5 +5,8 @@
              xmlns:local="clr-namespace:WpfApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <core:Byte x:Key="R">130</core:Byte>
+        <core:Byte x:Key="G">200</core:Byte>
+        <core:Byte x:Key="B">50</core:Byte>
     </Application.Resources>
 </Application>

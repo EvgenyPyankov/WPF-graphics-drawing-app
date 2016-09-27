@@ -17,9 +17,9 @@ namespace WpfApp
 {
     public partial class ColorWindow : Window
     {
-        private byte red = 100;
-        private byte green = 200;
-        private byte blue = 34;
+        private byte red;
+        private byte green;
+        private byte blue;
 
 
         private Color color;
@@ -45,16 +45,15 @@ namespace WpfApp
 
         private void Init()
         {
+            red = (byte)Application.Current.Resources["R"];
+            green = (byte)Application.Current.Resources["G"];
+            blue = (byte)Application.Current.Resources["B"];
             rScroll.Value = red;
             gScroll.Value = green;
             bScroll.Value = blue;
             color = Color.FromRgb(red, green, blue);
-            //MessageBox.Show(rScroll.Template.Resources["BorderBrush"].ToString());
-            
-            //Track track = (Track)rScroll.Template.FindName("track", rScroll);
-            //track.Thumb.Background =  new SolidColorBrush(Color.FromRgb(red, green, blue));
-          
-            
+ 
+                 
         }
 
         private void drawColorWindow()
@@ -64,24 +63,20 @@ namespace WpfApp
 
         private void Scroll(object sender, RoutedEventArgs e)
         {
-            //rScrollLabel.Content = "hello";
             byte value;
             FrameworkElement element = e.Source as FrameworkElement;
             switch (element.Name)
             {
                 case "rScroll":
                     value = (byte)rScroll.Value;
-                   // rScrollLabel.Content = value;
                     red = value;
                     break;
                 case "gScroll":
                     value = (byte)gScroll.Value;
-                   // gScrollLabel.Content = value;
                     green = value;
                     break;
                 case "bScroll":
                     value = (byte)bScroll.Value;
-                    //bScrollLabel.Content = value;
                     blue = value;
                     break;
             }
@@ -89,11 +84,13 @@ namespace WpfApp
             color.G = green;
             color.B = blue;
             drawColorWindow();
-           // rScrollLabel.Content = e.ToString();
         }
 
         private void AcceptСlick(object sender, RoutedEventArgs e)
         {
+            Application.Current.Resources["R"] = red;
+            Application.Current.Resources["G"] = green;
+            Application.Current.Resources["B"] = blue;
             this.DialogResult = true;
         }
     }

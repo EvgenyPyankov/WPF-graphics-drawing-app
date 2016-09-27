@@ -23,6 +23,17 @@
         <core:Double x:Key="MARGIN_Y">20</core:Double>
         <core:Double x:Key="ARROW_LENGTH">5</core:Double>
 
+        <Style x:Key="LABEL_STYLE" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="FontSize" Value="8"></Setter>
+            <Setter Property="FontFamily" Value="Tahoma"></Setter>
+            <!--<Setter Property="Width" Value="2"></Setter>
+               <Setter Property="Height" Value="2"></Setter>-->
+            <!--<Setter Property="Stroke" Value="Gray"/>
+            <Setter Property="Stroke" Value="White"/>
+            <Setter Property="BorderThickness" Value="2"/>-->
+        </Style>
+
         <Style x:Key="AXIS_STYLE" TargetType="{x:Type Line}">
             <Setter Property="Stroke" Value="Gray" />
             <Setter Property="StrokeThickness" Value="1"/>
@@ -30,8 +41,8 @@
 
         <Style x:Key="NET_STYLE" TargetType="{x:Type Line}">
             <Setter Property="Stroke" Value="Gray" />
-            <Setter Property="StrokeDashArray" Value="3" />
-            <Setter Property="StrokeThickness" Value="0.5"/>
+            <!--<Setter Property="StrokeDashArray" Value="3" />-->
+            <Setter Property="StrokeThickness" Value="0.3"/>
         </Style>
     </Window.Resources>
     

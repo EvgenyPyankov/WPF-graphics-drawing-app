@@ -30,8 +30,14 @@ namespace WpfApp
         private double axisStepX;
         private double axisStepY;
         private bool toDrawNet = false;
-        private double defaultWidth;
-  
+        private bool netIsAlreadyCalculated = false;
+        private double previousWidth;
+        private double previousHeight;
+        //private double[,] xNetLines;
+        //private double[,] yNetLines;
+        private List<double[]> xNetLines;
+        private List<double[]> yNetLines;
+
 
         private SolidColorBrush axisBrush = new SolidColorBrush(Color.FromRgb(128, 128, 128));
         private SolidColorBrush graphicBrush = new SolidColorBrush(Color.FromRgb(100, 200, 34));
@@ -46,11 +52,15 @@ namespace WpfApp
 
         private void Init()
         {
+            graphicBrush.Color = Color.FromRgb((byte)Application.Current.Resources["R"], (byte)Application.Current.Resources["G"], (byte)Application.Current.Resources["B"]);
             drawMenuButton.IsEnabled = false;
             marginX = (double)this.Resources["MARGIN_X"];
             marginY = (double)this.Resources["MARGIN_Y"];
             arrayLength = (double)this.Resources["ARROW_LENGTH"];
-            defaultWidth = canvas.ActualWidth;
+            //xNetLines = new double[10,4];
+            //yNetLines = new double[10, 4];
+            xNetLines = new List<double[]>();
+            yNetLines = new List<double[]>();
         }
 
         private void DrawGraphic(PointCollection polylinePoints)
@@ -79,35 +89,137 @@ namespace WpfApp
 
         private void calculateNet()
         {
-            //double step = de
-        }
-
-        private void DrawNet()
-        {
-            Label label1 = new Label();
-            label1.Content = "1.25";
-           // label1.SetValue(Canvas.SetBottom, 10);
-            Canvas.SetTop(label1, 100);
-            Canvas.SetLeft(label1, 100);
-            Canvas can = new Canvas();
-            can.Children.Add(label1);
-            canvas.Children.Add(can);
-            List<double[]> lines = new List<double[]>();
-            double axisStepX = (width - 2 * marginX) / 9;
-            double axisStepY =(height - 2 * marginY) / 7;
+            previousWidth = canvas.ActualWidth;
+            previousHeight = canvas.ActualHeight;
+            //List<double[]> lines = new List<double[]>();
+            axisStepX = (width - 2 * marginX) / 9;
+            axisStepY = (height - 2 * marginY) / 7;
             double cur = marginX;
-            while (cur <= width - marginX / 2) 
+            int i = 0;
+            while (cur <= width - marginX / 2)
             {
-                lines.Add(new double[] { cur, marginY, cur, height - marginY });
+                //xNetLines[i, 0] = cur;
+                //xNetLines[i, 1] = marginY;
+                //xNetLines[i, 2] = cur;
+                //xNetLines[i, 3] = height - marginY;
+                //lines.Add(new double[] { cur, marginY, cur, height - marginY });
+                xNetLines.Add(new double[] { cur, marginY, cur, height - marginY });
+               // i++;
                 cur += axisStepX;
             }
 
             cur = marginY;
-            while (cur <= height-marginY/2)
+            i = 0;
+            while (cur <= height - marginY / 2)
             {
-                lines.Add(new double[] { marginX, cur, width-marginX, cur });
+                //lines.Add(new double[] { marginX, cur, width - marginX, cur });
+                //yNetLines[i, 0] = marginX;
+                //yNetLines[i, 1] = cur;
+                //yNetLines[i, 2] = width-marginX;
+                //yNetLines[i, 3] = cur;
+                // i++;
+                yNetLines.Add(new double[] { marginX, cur, width - marginX, cur });
                 cur += axisStepY;
             }
+            netIsAlreadyCalculated = true;
+        }
+
+        private void UpdateNet()
+        {
+            double currentWidth = canvas.ActualWidth;
+            double currentHeight = canvas.ActualHeight;
+            double tempX = (currentWidth / previousWidth);
+            double tempY = (currentHeight / previousHeight);
+            axisStepX *= tempX;
+            axisStepY *= tempY;
+            previousWidth = currentWidth;
+            previousHeight = currentHeight;
+
+            
+            //while (cur <= width - marginX / 2)
+            //{
+            //    xNetLines.Add(new double[] { cur, marginY, cur, height - marginY });
+            //    // i++;
+            //    cur += axisStepX;
+            //}
+
+            double temp = marginX;
+         
+            for (int i=0; i<xNetLines.Count; i++)
+            {
+                xNetLines[i][0] *= tempX;
+                xNetLines[i][2] *= tempX;
+            }
+
+            //cur = marginY;
+            //i = 0;
+            //while (cur <= height - marginY / 2)
+            //{
+            //    //lines.Add(new double[] { marginX, cur, width - marginX, cur });
+            //    //yNetLines[i, 0] = marginX;
+            //    //yNetLines[i, 1] = cur;
+            //    //yNetLines[i, 2] = width-marginX;
+            //    //yNetLines[i, 3] = cur;
+            //    // i++;
+            //    yNetLines.Add(new double[] { marginX, cur, width - marginX, cur });
+            //    cur += axisStepY;
+            //}
+        }
+
+        private void DrawNumbers()
+        {
+            double left;
+            double top;
+            top = y0;
+            foreach (double[] i in xNetLines)
+            {
+                left = i[0];
+                Label label1 = new Label();
+                label1.Style = (Style)this.Resources["LABEL_STYLE"];
+                label1.Content = "1.25";
+                // label1.SetValue(Canvas.SetBottom, 10);
+                Canvas.SetTop(label1, top);
+                Canvas.SetLeft(label1, left);
+                Canvas can = new Canvas();
+                can.Children.Add(label1);
+                canvas.Children.Add(can);
+            }
+
+            left = x0;
+            foreach (double[] i in yNetLines)
+            {
+                top = i[1];
+                Label label1 = new Label();
+                label1.Style = (Style)this.Resources["LABEL_STYLE"];
+                label1.Content = "1.25";
+                // label1.SetValue(Canvas.SetBottom, 10);
+                Canvas.SetTop(label1, top);
+                Canvas.SetLeft(label1, left);
+                Canvas can = new Canvas();
+                can.Children.Add(label1);
+                canvas.Children.Add(can);
+            }
+        }
+
+        private void DrawNet()
+        {
+            
+            //List<double[]> lines = new List<double[]>();
+            //double axisStepX = (width - 2 * marginX) / 9;
+            //double axisStepY =(height - 2 * marginY) / 7;
+            //double cur = marginX;
+            //while (cur <= width - marginX / 2) 
+            //{
+            //    lines.Add(new double[] { cur, marginY, cur, height - marginY });
+            //    cur += axisStepX;
+            //}
+
+            //cur = marginY;
+            //while (cur <= height-marginY/2)
+            //{
+            //    lines.Add(new double[] { marginX, cur, width-marginX, cur });
+            //    cur += axisStepY;
+            //}
             //findAxisSteps();
             //double cur;
             //int n = (int)(x0-marginX*2 / axisStepX);
@@ -126,7 +238,8 @@ namespace WpfApp
             //    lines.Add(new double[] { marginX, cur, width - marginX, cur });
             //    cur += axisStepY;
             //}
-            DrawLines(lines, (Style)this.Resources["NET_STYLE"]);
+            DrawLines(xNetLines, (Style)this.Resources["NET_STYLE"]);
+            DrawLines(yNetLines, (Style)this.Resources["NET_STYLE"]);
         }
 
         private void DrawAxis()
@@ -144,6 +257,9 @@ namespace WpfApp
             label.HorizontalAlignment = HorizontalAlignment.Left;
             label.VerticalAlignment = VerticalAlignment.Center;
             canvas.Children.Add(label);
+            if (!netIsAlreadyCalculated)
+                calculateNet();
+            DrawNumbers();
         }
 
         private int countZeros(double a)
